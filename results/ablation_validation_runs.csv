@@ -1,0 +1,19 @@
+config_id,label,seed,stage1,stage2,eval_on,eval_split,stage1_optimizer,stage1_lr0,stage1_lr_ok,stage2_optimizer,stage2_lr0,stage2_lr_ok,mAP50_mask,mAP50_95_mask,P_mask,R_mask,mAP50_box,mAP50_95_box,P_box,R_box,preprocess_ms,inference_ms,postprocess_ms,total_ms,FPS
+cross_proc_raw,Cross-dataset FT (Proc -> Raw),0,processed,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.9771,0.948888387,0.994663726,0.974811463,0.9868,0.9635,0.9947,0.9748,2.98,4.82,5.95,13.75,72.71
+cross_proc_raw,Cross-dataset FT (Proc -> Raw),1,processed,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.972982895,0.937089993,0.986077493,0.966264454,0.9804,0.9584,0.9861,0.9663,2.84,5.93,8.79,17.57,56.92
+cross_proc_raw,Cross-dataset FT (Proc -> Raw),2,processed,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.977413793,0.942389315,0.983039203,0.974811463,0.9879,0.9631,0.983,0.9748,2.56,4.87,5.04,12.48,80.15
+cross_raw_proc,Cross-dataset FT (Raw -> Proc),0,raw,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.9778,0.949248289,0.995063732,0.970980685,0.9898,0.9659,0.9951,0.971,2.04,4.66,4.66,11.35,88.07
+cross_raw_proc,Cross-dataset FT (Raw -> Proc),1,raw,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.978088235,0.946708129,0.997720334,0.974811463,0.9895,0.9686,0.9977,0.9748,2.18,4.58,4.94,11.71,85.43
+cross_raw_proc,Cross-dataset FT (Raw -> Proc),2,raw,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.97784127,0.949133198,0.991267293,0.964555053,0.9892,0.9662,0.9913,0.9646,2.26,5.59,5.69,13.55,73.82
+ft_proc_proc,Fine-tuning (Proc -> Proc),0,processed,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.977333333,0.943298238,0.98664381,0.973660012,0.9881,0.9666,0.9866,0.9737,2.54,6.06,6.69,15.29,65.39
+ft_proc_proc,Fine-tuning (Proc -> Proc),1,processed,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.975,0.940667756,0.998008072,0.974811463,0.9829,0.9644,0.998,0.9748,1.82,4.33,4.61,10.76,92.94
+ft_proc_proc,Fine-tuning (Proc -> Proc),2,processed,processed,processed,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.977876712,0.948874883,0.997638595,0.974811463,0.9896,0.9688,0.9976,0.9748,2.47,4.9,4.98,12.35,80.99
+ft_raw_raw,Fine-tuning (Raw -> Raw),0,raw,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.977386364,0.945935776,0.997027229,0.973445787,0.9884,0.9688,0.997,0.9734,1.49,4.77,4.8,11.06,90.38
+ft_raw_raw,Fine-tuning (Raw -> Raw),1,raw,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.975,0.946290957,0.996937085,0.974811463,0.9875,0.9693,0.9969,0.9748,1.9,4.37,4.96,11.22,89.1
+ft_raw_raw,Fine-tuning (Raw -> Raw),2,raw,raw,raw,val,AdamW,0.002,TRUE,AdamW,0.0003,TRUE,0.977233388,0.942894,0.981093051,0.969683258,0.9872,0.961,0.9811,0.9697,2.11,4.98,4.67,11.75,85.08
+single_proc,Single-stage (Processed),0,processed,-,processed,val,AdamW,0.002,TRUE,,,,0.974833333,0.93942101,0.987217749,0.973930229,0.9844,0.9625,0.9872,0.9739,0.62,4.29,3.13,8.05,124.29
+single_proc,Single-stage (Processed),1,processed,-,processed,val,AdamW,0.002,TRUE,,,,0.975,0.941049689,0.997404302,0.974811463,0.9791,0.9521,0.9974,0.9748,2.68,5.61,6.83,15.12,66.12
+single_proc,Single-stage (Processed),2,processed,-,processed,val,AdamW,0.002,TRUE,,,,0.97681352,0.938285366,0.987738667,0.969271508,0.9869,0.9627,0.9877,0.9693,2.18,7.03,8.12,17.33,57.7
+single_raw,Single-stage (Raw),0,raw,-,raw,val,AdamW,0.002,TRUE,,,,0.975,0.935807706,0.997302883,0.971249187,0.9837,0.9538,0.9973,0.9712,0.65,9.26,2.26,12.16,82.22
+single_raw,Single-stage (Raw),1,raw,-,raw,val,AdamW,0.002,TRUE,,,,0.975,0.943278414,0.996220851,0.974811463,0.9822,0.956,0.9962,0.9748,1.63,4.94,5.39,11.96,83.64
+single_raw,Single-stage (Raw),2,raw,-,raw,val,AdamW,0.002,TRUE,,,,0.973823529,0.94419883,0.988093734,0.974811463,0.9827,0.9628,0.9881,0.9748,2.44,4.55,4.69,11.68,85.59

@@ -1,0 +1,13 @@
+# Tested with Python 3.11-3.13 (Google Colab)
+ultralytics>=8.3        # training used the Colab version at the time; latency measured with 8.4.175
+torch>=2.1
+opencv-python>=4.8
+numpy
+pandas
+scipy
+matplotlib
+pyyaml
+pillow
+scikit-image            # Delta-E (CIEDE2000) in the BO analysis
+scikit-learn
+optuna                  # Bayesian optimization / fANOVA importance

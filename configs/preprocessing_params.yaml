@@ -1,0 +1,24 @@
+# Colour-preserving preprocessing parameters
+# selected: values of the Bayesian-optimization trial selected for the processed dataset (Table 5)
+# search_space: ranges explored by the TPE sampler (Table 4)  -> VERIFY against Table 4 before release
+selected:
+  gamma_min: 0.7825
+  gamma_max: 1.2026
+  gamma_target_mean: 0.4835
+  edge_blur_sigma: 0.6074
+  edge_strength: 0.0469
+  hsv_saturation_gain: 1.0171
+
+search_space:
+  gamma_min: [0.60, 0.80]
+  gamma_max: [1.20, 1.40]
+  gamma_target_mean: [0.45, 0.55]
+  edge_blur_sigma: [0.5, 0.9]
+  edge_strength: [0.02, 0.08]
+  hsv_saturation_gain: [0.98, 1.05]
+
+bayesian_optimization:
+  sampler: TPE (Optuna)
+  random_startup_trials: 10
+  epochs_per_trial: 60
+  objective: "J = mAP@0.5:0.95 (validation) - lambda * DeltaE_CIEDE2000 (see Eq. (8))"

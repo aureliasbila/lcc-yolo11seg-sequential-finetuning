@@ -1,0 +1,9 @@
+# Example Ultralytics data file (YOLO segmentation format). Adjust 'path' to your copy of the dataset.
+path: /content/drive/MyDrive/dataset/Dataset_Roboflow     # raw dataset (Dataset_Gamma_New for processed)
+train: train/images
+val: valid/images
+test: test/images
+names:
+  0: N23   # LCC reading 2.0-2.5 (low nitrogen status proxy)
+  1: N34   # LCC reading 3.0-3.5 (moderate)
+  2: N45   # LCC reading 4.0-5.0 (high)

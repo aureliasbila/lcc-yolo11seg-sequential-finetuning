@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article below."
+title: "Adaptive Image Preprocessing and Sequential Fine-Tuning Strategy for Rice Leaf Nitrogen Status using Instance Segmentation YOLO11 - code"
+authors:
+  - family-names: Salsabila
+    given-names: Aurelia
+  - family-names: Hadi
+    given-names: Mochammad Zen Samsono
+  - family-names: Karlita
+    given-names: Tita
+license: MIT
+repository-code: "https://github.com/<username>/lcc-yolo11seg-sequential-finetuning"
+preferred-citation:
+  type: article
+  title: "Adaptive Image Preprocessing and Sequential Fine-Tuning Strategy for Rice Leaf Nitrogen Status using Instance Segmentation YOLO11"
+  authors:
+    - family-names: Salsabila
+      given-names: Aurelia
+    - family-names: Hadi
+      given-names: Mochammad Zen Samsono
+    - family-names: Karlita
+      given-names: Tita
+  journal: "International Journal of Intelligent Engineering and Systems"
+  year: 2026
+  notes: "Under review (manuscript ID 20266287)"

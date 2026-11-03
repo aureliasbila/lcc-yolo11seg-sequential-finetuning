@@ -1,0 +1,42 @@
+# Training settings actually used (copied from Ultralytics args.yaml of run
+# runs_finetune_new_best/ft_best_gamma_freeze0_lr0.0003; the raw run differs only in 'data').
+# Stage-specific values (epochs, lr0, seeds) are listed in Table 7 of the paper and below.
+task: segment
+imgsz: 640
+batch: 16
+optimizer: AdamW
+momentum: 0.937
+weight_decay: 0.0005
+lrf: 0.01
+warmup_epochs: 3.0
+cos_lr: false
+close_mosaic: 10
+patience: 100       # fine-tuning runs (baseline sweep used patience 20)
+deterministic: true
+amp: true
+overlap_mask: true
+mask_ratio: 4
+iou: 0.7            # NMS IoU used by the Ultralytics validator
+# online augmentation (training batches only); colour augmentation disabled to preserve LCC colour
+hsv_h: 0.0
+hsv_s: 0.0
+hsv_v: 0.0
+degrees: 0.0
+translate: 0.1
+scale: 0.3
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.0
+mosaic: 1.0
+mixup: 0.0
+copy_paste: 0.0
+erasing: 0.4
+auto_augment: randaugment
+
+stages:
+  baseline:            {models: [yolov8n-seg, yolov9c-seg, yolo11n-seg], lr0: [0.0010, 0.0015, 0.0020], epochs: 100, patience: 20, seed: 0}
+  finetune_grid:       {freeze: [0, 5, 10], lr0: [0.0001, 0.0003, 0.0005], epochs: 50}
+  ablation_stage1:     {lr0: 0.002, seeds: [0, 1, 2]}
+  ablation_stage2:     {lr0: 0.0003, freeze: 0, seeds: [0, 1, 2]}
+  # VERIFY epochs of ablation stages against Table 7 before release

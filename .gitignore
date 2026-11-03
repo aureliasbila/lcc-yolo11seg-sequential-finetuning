@@ -1,0 +1,17 @@
+# data, weights and run outputs are not versioned
+*.pt
+*.pth
+*.onnx
+*.zip
+runs/
+datasets/
+Dataset_*/
+New_*/
+**/images/
+**/labels/
+*.cache
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
