@@ -1,0 +1,5 @@
+subset,images,instances,N23,N34,N45
+train,1405,1408,658,333,417
+validation,134,138,65,34,39
+internal_test,67,68,24,20,24
+Total,1606,1614,747,387,480

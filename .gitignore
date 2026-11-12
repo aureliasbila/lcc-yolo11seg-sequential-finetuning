@@ -1,5 +1,6 @@
 # data, weights and run outputs are not versioned
 *.pt
+!/weights/*.pt
 *.pth
 *.onnx
 *.zip
