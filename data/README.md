@@ -1,82 +1,101 @@
 # Dataset Documentation
 
-This folder documents the datasets used in the study and provides image-level partition files. The images and annotations themselves are not redistributed in this repository (see Section 6).
-
 ## 1. Main Rice Leaf Dataset
 
-The main dataset consists of 671 original field images of individual rice leaves acquired between 2024 and 2026 with a Sony a6000 digital camera at rice fields in Gresik, Kediri, and Yogyakarta, Indonesia. It contains 677 annotated leaf instances belonging to three Leaf Color Chart (LCC) reference classes:
+The main dataset consists of 671 original field images of individual rice leaves acquired using a Sony α6000 digital camera. The dataset contains 677 annotated leaf instances belonging to three Leaf Color Chart (LCC) reference classes:
 
-- **Class 0 – N23:** LCC scores of 2.0–2.5 (309 instances).
-- **Class 1 – N34:** LCC scores of 3.0–3.5 (165 instances).
-- **Class 2 – N45:** LCC scores of 4.0–5.0 (203 instances).
+- **Class 0 – N23:** LCC scores of 2.0–2.5.
+- **Class 1 – N34:** LCC scores of 3.0–3.5.
+- **Class 2 – N45:** LCC scores of 4.0–5.0.
 
-Each leaf is annotated with a polygon in YOLO instance-segmentation format. The LCC reading was determined in the field before the leaf was photographed.
+Each leaf instance is annotated using polygon-based instance segmentation annotations in YOLO segmentation format.
 
-### 1.1 Partition and Augmentation
+### 1.1 Original Dataset Split and Augmentation
 
-The 671 original images were partitioned at the original-image level (70:20:10) into three subsets before any augmentation:
+The original dataset was divided at the image level into three subsets before augmentation:
 
-- **Training:** 470 original images (471 instances).
-- **Validation:** 134 images (138 instances).
-- **Internal test:** 67 images (68 instances).
+- **Training:** 470 original images.
+- **Validation:** 134 original images.
+- **Internal test:** 67 original images.
 
-Offline augmentation (horizontal and vertical flipping and rotation between −12° and +12°, three outputs per image) was applied only to the training subset after partitioning. The exported training subset contains 1,405 images with 1,408 instances and is listed file by file in `splits/main_dataset_split.csv`. [TODO: state the reason why the exported count differs from 3 × 470 = 1,410, or remove this sentence. Cannot be verified from the manuscript.]
+The total number of original images was 671, comprising 677 annotated leaf instances.
 
-The validation and internal test subsets are not augmented.
+Offline augmentation was subsequently applied exclusively to the training subset to increase the number of training samples and improve model generalization. Three augmented outputs were generated per original training image, except for five single-instance images for which only two outputs were obtained (the cause was not determined). The augmented training set therefore contains 465 × 3 + 5 × 2 = 1,405 images (1,408 instances), compared with the nominal 1,410 images (1,413 instances). No original image or annotation was excluded.
 
-### 1.2 Limitations of the Partition
+The validation and internal test subsets were kept unaugmented to preserve their original image distributions and provide an unbiased evaluation of model performance.
 
-Plant, acquisition-session, and site identifiers were not retained during dataset consolidation. The split could therefore not be grouped by these factors, and images from the same plant, session, or site may appear in different subsets. No byte-identical files exist across the exported subsets. Original file names that occur in both the training and validation subsets were inspected and correspond to different photographs.
+### 1.2 Data Collection Locations
+
+The original rice leaf images were collected from three agricultural areas in Indonesia:
+
+- Gresik, East Java.
+- Kediri, East Java.
+- Yogyakarta, Special Region of Yogyakarta.
+
+Site and session identifiers were not retained in the exported dataset. This limitation is considered when interpreting the model evaluation results and is discussed in the manuscript.
 
 ## 2. External Test Dataset
 
-The external test set comprises 130 images with 130 annotated instances, collected in September–October 2026 with the same camera and the same labelling and annotation protocols as the main dataset. It includes new acquisition sessions in Gresik (45 images, 45 instances) and Kediri (48 images, 48 instances), which are represented in the main dataset, and Sidoarjo (37 images, 37 instances), which is not. Overall, the set contains 118 N23 instances and 12 N34 instances (two in Gresik, two in Kediri, and eight in Sidoarjo). N45 is absent because no leaf with an LCC reading of 4.0 or higher was found.
+An additional external test dataset was collected independently from new acquisition sessions in Gresik and Kediri, as well as from Sidoarjo, a location not represented in the main dataset.
 
-All external images were used only for testing; they were not used for training, augmentation, or configuration selection, and they were exported without augmentation. In the external annotation files, class 0 is N23 and class 1 is N34.
+All external images were reserved exclusively for testing and were not used for model training, augmentation, or model configuration selection.
 
-The external set is organized per site as a Roboflow YOLO export:
+The external dataset is organized into the following directory structure:
 
 ```text
-New_Gsk/   (Gresik)
-    data.yaml
-    test/images/
-    test/labels/
-New_Kdr/   (Kediri)
-    data.yaml
-    test/images/
-    test/labels/
-New_Sda/   (Sidoarjo)
-    data.yaml
-    test/images/
-    test/labels/
+New_Gsk/
+    images/
+    labels/
+
+New_Kdr/
+    images/
+    labels/
+
+New_Sda/
+    images/
+    labels/
 ```
+
+These external test sets were used to assess model generalization across different acquisition sessions and geographical locations.
 
 ## 3. Annotation Format
 
-Each line of a label file describes one leaf: a class identifier followed by normalized polygon coordinates (0–1 relative to image width and height):
+The dataset uses the YOLO instance segmentation annotation format.
+
+Each annotation contains a class identifier followed by normalized polygon coordinates:
 
 ```text
 class_id x1 y1 x2 y2 ... xn yn
 ```
 
-In the main dataset, class 0 is N23, class 1 is N34, and class 2 is N45. In the external dataset, class 0 is N23 and class 1 is N34.
+The class identifiers are defined as follows:
 
-## 4. Image-Level Partition Files
+- `0`: N23
+- `1`: N34
+- `2`: N45
 
-The `splits/` folder lists every image of both datasets together with its SHA-256 checksum, so that a recipient of the data can verify that it matches the data used in the study.
+Polygon coordinates are normalized relative to the image width and height, with values ranging from 0 to 1.
 
-`main_dataset_split.csv` contains one row for each exported image of the main dataset (1,606 images). Each row gives the subset (training, validation, or internal test), the exported file name, the camera-generated original name, whether the image is an augmented output, the number of annotated instances in total and per class, image width and height, and the SHA-256 checksum. `main_dataset_summary.csv` gives the numbers of images and instances per subset and class.
+## 4. Dataset Availability and Controlled Access
 
-`external_test_files.csv` contains one row for each external image (130 images), with the site, file name, original name, instance counts per class, image width and height, and the SHA-256 checksum. `external_test_summary.csv` gives the numbers of images and instances per site and class.
+The image-level partition identifiers (training, validation, internal test and external test) and the trained model weights are provided in this repository (see the release notes). The raw rice leaf images and their annotations are not publicly available because of data-sharing permissions, but they can be obtained through the following controlled-access procedure.
 
-The original name is the camera-generated file name without the export suffix. Camera file names were reused by different photographs, also across subsets, so files must be identified by their SHA-256 checksum (and, where helpful, by image dimensions), not by name.
+**How to request access**
 
-The files were generated with `scripts/data/make_partition_csv.py`.
+1. Open an issue in this repository titled "Data access request".
+2. Provide your name, institutional affiliation, a short description of the intended research use, and confirmation that the conditions below are accepted.
 
-## 5. Intended Use
+**Conditions of use**
 
-The data support research on rice leaf color classification and instance segmentation using LCC reference categories. The LCC categories are visual reference labels; they are not direct measurements of leaf nitrogen concentration.
+- The data are used for non-commercial academic research only.
+- The data are not redistributed or shared with third parties.
+- Any resulting publication cites the associated article and acknowledges the dataset.
+- The data are not used to identify individual farmers or fields.
 
-## 6. Dataset Availability
+Requests are normally answered within two weeks.
 
-The images and annotations are not publicly available. The partition files in the `splits/` folder are public. Access to the images and annotations for verification is available through the following controlled-access procedure: [TODO: contact (corresponding author e-mail), information a requester must provide, data-use conditions, and expected response time. Cannot be verified from the manuscript.]
+## 5. Usage Notes
+
+The dataset is intended for research on rice leaf color classification, instance segmentation, and the assessment of leaf nitrogen status using Leaf Color Chart (LCC) reference categories.
+
+The LCC categories serve as reference labels for leaf color and nitrogen-status assessment in this study. They should not be interpreted as direct measurements of leaf nitrogen concentration.
