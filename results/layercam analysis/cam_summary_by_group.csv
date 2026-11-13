@@ -1,0 +1,6 @@
+group,n,leaf_frac,cam_in_leaf_mean,cam_in_leaf_sd,cam_in_leaf_median,cam_vs_area_median,pct_degenerate
+Internal-N23,23,0.317,0.713,0.108,0.698,2.473,0.0
+Internal-N34,20,0.284,0.706,0.041,0.699,2.423,0.0
+Internal-N45,24,0.335,0.697,0.069,0.706,2.096,0.0
+Sidoarjo-N34-correct,3,0.099,0.637,0.014,0.64,7.041,0.0
+Sidoarjo-N34-wrong->N23,5,0.093,0.541,0.059,0.524,6.255,0.0
